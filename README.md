@@ -18,7 +18,7 @@ https://serebrovskiy.github.io/rating-place
 ---
 
 
- ### Автор :
+ ### Автор
  *Серебровский Александр*
 
 
