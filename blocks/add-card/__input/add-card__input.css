@@ -1,0 +1,18 @@
+.add-card__input {
+  width: 150px;
+  height: 30px;
+  margin-right: 20px;
+  border: 1px solid grey;
+}
+
+.add-card__input:invalid {
+  border: 1px solid red;
+}
+
+.add-card__input:valid {
+  border: 1px solid grey;
+}
+
+.add-card__input:focus {
+  outline: none;
+}
