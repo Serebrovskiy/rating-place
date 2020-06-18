@@ -1,0 +1,16 @@
+.add-card__button {
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: rgb(255, 244, 146);
+  border: 1px solid grey;
+}
+
+.add-card__button:focus {
+  outline: none;
+}
+
+.add-card__button:hover {
+  opacity: .6;
+  cursor: pointer;
+}

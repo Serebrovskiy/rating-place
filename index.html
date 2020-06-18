@@ -2,35 +2,53 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="images/faviconka.png">
-    <title>Rating place</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <link rel="icon" type="image/png" href="images/faviconka.png">
+  <title>Rating place</title>
 </head>
 
 <body>
-    <main class="root">
-        <button class="button" type="button">Добавить новый блок</button>
-        <input class="input-number" type="text" placeholder="Введите номер блока" id="">
-        <hr>
-        <div id="1" class="block">
-            <p class="block__text">1</p>
-            <p class="block__text2">&nbsp (блок 1)</p>
-        </div>
+  <main class="root">
+    <form class="add-card">
+      <input class="add-card__input add-card__input_name" type="text" placeholder="Название"
+        pattern="^[a-zA-Zа-яА-Я0-9\s-]+$" maxlength="15">
+      <input class="add-card__input add-card__input_image" type="url" placeholder="Ссылка на картинку">
+      <input class="add-card__input add-card__input_number" type="text" placeholder="Номер" pattern="^[1-9]">
+      <button class="add-card__button" type="button">Добавить</button>
+    </form>
+    <section class="cards">
+      <div class="card" data-index-number="1" value="abcde">
+        <p class="card__number">1</p>
+        <p class="card__text">Мерседес</p>
+        <img class="card__image" src="./images/mers.jpg" alt="">
+      </div>
 
-        <div id="2" class="block">
-            <p class="block__text">2</p>
-            <p class="block__text2">&nbsp (блок 2)</p>
-        </div>
+      <div class="card" data-index-number="2">
+        <p class="card__number">2</p>
+        <p class="card__text">БМВ</p>
+        <img class="card__image" src="./images/bmw.jpg" alt="">
+      </div>
 
-        <div id="3" class="block">
-            <p class="block__text">3</p>
-            <p class="block__text2">&nbsp (блок 3)</p>
-        </div>
-    </main>
+      <div class="card" data-index-number="3">
+        <p class="card__number">3</p>
+        <p class="card__text">Ауди</p>
+        <img class="card__image" src="./images/Audi.jpg" alt="">
+      </div>
+    </section>
+  </main>
 
-    <script src="scripts/script.js"></script>
+  <template id="card">
+    <div class="card">
+      <p class="card__number"></p>
+      <p class="card__text"></p>
+      <img class="card__image" src="./images/" alt="">
+    </div>
+  </template>
+
+
+  <script src="scripts/script.js"></script>
 </body>
 
 </html>
