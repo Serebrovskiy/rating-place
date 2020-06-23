@@ -2,53 +2,12 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
-  <link rel="icon" type="image/png" href="images/faviconka.png">
+
   <title>Rating place</title>
 </head>
 
 <body>
-  <main class="root">
-    <form class="add-card">
-      <input class="add-card__input add-card__input_name" type="text" placeholder="Название"
-        pattern="^[a-zA-Zа-яА-Я0-9\s-]+$" maxlength="15">
-      <input class="add-card__input add-card__input_image" type="url" placeholder="Ссылка на картинку">
-      <input class="add-card__input add-card__input_number" type="text" placeholder="Номер" pattern="^[1-9]">
-      <button class="add-card__button" type="button">Добавить</button>
-    </form>
-    <section class="cards">
-      <div class="card" data-index-number="1" value="abcde">
-        <p class="card__number">1</p>
-        <p class="card__text">Мерседес</p>
-        <img class="card__image" src="./images/mers.jpg" alt="">
-      </div>
 
-      <div class="card" data-index-number="2">
-        <p class="card__number">2</p>
-        <p class="card__text">БМВ</p>
-        <img class="card__image" src="./images/bmw.jpg" alt="">
-      </div>
-
-      <div class="card" data-index-number="3">
-        <p class="card__number">3</p>
-        <p class="card__text">Ауди</p>
-        <img class="card__image" src="./images/Audi.jpg" alt="">
-      </div>
-    </section>
-  </main>
-
-  <template id="card">
-    <div class="card">
-      <p class="card__number"></p>
-      <p class="card__text"></p>
-      <img class="card__image" src="./images/" alt="">
-    </div>
-  </template>
-
-
-  <script src="scripts/script.js"></script>
 </body>
 
 </html>
