@@ -1,7 +1,7 @@
 
 const button = document.querySelector('.add-card__button');
 const cardTemplate = document.querySelector('#card').content;
-const areaCards = document.querySelector('.root');
+//const areaCards = document.querySelector('.root');
 const addCards = document.querySelector('.add-card');
 const numberInput = addCards.querySelector('.add-card__input_number');   //номер который мы ввели
 const nameInput = addCards.querySelector('.add-card__input_name');
@@ -16,7 +16,6 @@ function createCard() {    //создаем новый блок  add-card__input
   const cardImage = cardElement.querySelector('.card__image');
 
   // numberInput.setAttribute('required', '');
-
 
   cardNumber.textContent = numberInput.value;
   card.dataset.indexNumber = numberInput.value;   //второй вариант записи  -> card.setAttribute('id', number.value);
