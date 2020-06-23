@@ -1,0 +1,17 @@
+@import url(./__button/add-card__button.css);
+@import url(./__input/add-card__input.css);
+@import url(./__button/_disabled/add-card__button_disabled.css);
+@import url(./__input/_number/add-card__input_number.css);
+
+.add-card {
+  width: 100vw;
+  min-height: 100px;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  border-bottom: 1px solid grey;
+  opacity: 0.8;
+  z-index: 1;
+}
