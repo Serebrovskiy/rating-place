@@ -1,7 +1,6 @@
 .add-card__button {
   width: 200px;
-  height: 300px;
-  /* height: 30px; */
+  height: 30px;
   border-radius: 10px;
   background-color: rgb(255, 244, 146);
   border: 1px solid grey;
