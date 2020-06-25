@@ -1,3 +1,13 @@
 .add-card__input_number {
   width: 50px;
 }
+
+@media screen and (max-width: 400px) {
+  .add-card__input_number {
+    width: 20px;
+    /* placeholder: Номер */
+  }
+  .add-card__input_number::placeholder{
+    color: transparent;
+  }
+}

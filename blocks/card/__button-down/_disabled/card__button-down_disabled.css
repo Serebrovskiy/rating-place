@@ -1,0 +1,8 @@
+.card__button-down_disabled {
+  opacity: .2;
+}
+
+.card__button-down_disabled:hover {
+  opacity: .2;
+  cursor: default;
+}

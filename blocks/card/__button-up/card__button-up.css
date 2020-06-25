@@ -1,0 +1,31 @@
+.card__button-up {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    background-image: url(../../../images/arrow-up.png);
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-self: center;
+    margin-right: 10px;
+    border: none;
+    opacity: .5;
+}
+
+.card__button-up:hover {
+  opacity: .9;
+  cursor: pointer;
+}
+
+.card__button-up:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 400px) {
+  .card__button-up {
+    width: 20px;
+    height: 20px;
+    background-size: 20px;
+    margin-right: 5px;
+  }
+}

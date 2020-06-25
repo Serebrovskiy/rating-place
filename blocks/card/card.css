@@ -1,6 +1,11 @@
 @import url(./__number/card__number.css);
 @import url(./__text/card__text.css);
 @import url(./__image/card__image.css);
+@import url(./__container-buttons/card__container-buttons.css);
+@import url(./__button-up/card__button-up.css);
+@import url(./__button-down/card__button-down.css);
+@import url(./__button-up/_disabled/card__button-up_disabled.css);
+@import url(./__button-down/_disabled/card__button-down_disabled.css);
 
 .card {
   width: 500px;
@@ -11,6 +16,14 @@
   align-items: center;
   border: 1px solid lightslategray;
   animation: showBlock 1s linear forwards;
+}
+
+@media screen and (max-width: 400px) {
+  .card {
+    width: 300px;
+    height: 100px;
+    margin: 15px auto 0;
+  }
 }
 
 

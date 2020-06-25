@@ -1,6 +1,14 @@
 .card__text {
   font-size: 24px;
   font-weight: 700;
-  margin: 20px 30px;
+  margin: 20px 15px;
   color: #333;
+  width: 100px;
+}
+
+@media screen and (max-width: 400px) {
+  .card__text {
+    font-size: 16px;
+    width: 60px;
+  }
 }

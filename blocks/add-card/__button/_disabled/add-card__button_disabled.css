@@ -9,3 +9,9 @@
   opacity: 0.2;
   cursor: default;
 }
+
+@media screen and (max-width: 400px) {
+  .add-card__button_disabled {
+    color: transparent;
+  }
+}

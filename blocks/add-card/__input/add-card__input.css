@@ -16,3 +16,15 @@
 .add-card__input:focus {
   outline: none;
 }
+
+
+@media screen and (max-width: 400px) {
+  .add-card__input {
+    width: 100px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  .add-card__input::placeholder{
+    color: transparent;
+  }
+}
