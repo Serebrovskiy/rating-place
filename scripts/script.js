@@ -1,36 +1,23 @@
+import { initialCards } from './utils.js';
+import { cardConfig } from './utils.js';
 
-
-const cardTemplate = document.querySelector('#card').content;
-const cardList = document.querySelectorAll(".card");   // находим все блоки
-//const areaCards = document.querySelector('.root');
-const button = document.querySelector('.add-card__button');
-const addCards = document.querySelector('.add-card');
-const numberInput = addCards.querySelector('.add-card__input_number');   //номер который мы ввели
-const nameInput = addCards.querySelector('.add-card__input_name');
-const imageInput = addCards.querySelector('.add-card__input_image');
-const buttonUpPosition = document.querySelector('.card__button-up');
-const buttonDownPosition = document.querySelector('.card__button-down');
-
-
-
-function createCard() {    //создаем новый блок  add-card__input_name
-  const cardElement = cardTemplate.cloneNode(true);
+function createCard(input) {    //создаем новый блок  add-card__input_name
+  const cardElement = cardConfig.cardTemplate.cloneNode(true);
   const card = cardElement.querySelector('.card');
   const cardNumber = cardElement.querySelector('.card__number');
   const cardText = cardElement.querySelector('.card__text');
   const cardImage = cardElement.querySelector('.card__image');
 
-  // numberInput.setAttribute('required', '');
-  cardNumber.textContent = numberInput.value;
-  card.dataset.indexNumber = numberInput.value;   //второй вариант записи  -> card.setAttribute('id', number.value);
-  nameInput.value ? cardText.textContent = nameInput.value : cardText.textContent = 'Жига';  //если поле пустое, то вывводим жигу
-  imageInput.value ? cardImage.src = imageInput.value : cardImage.src = "./images/жига.jpg";   //если поле пустое, то вывводим жигу
+  cardNumber.textContent = input.number;
+  card.dataset.indexNumber = input.number;   //второй вариант записи  -> card.setAttribute('id', number.value);  //присваиваем карточке data-атрибут по его номеру
+  input.name ? cardText.textContent = input.name : cardText.textContent = 'Жигули';  //если поле пустое, то вывводим жигу
+  input.image ? cardImage.src = input.image : cardImage.src = "./images/жига.jpg";   //если поле пустое, то вывводим жигу
 
   return cardElement;
 }
 
 function rangingIdAfterInput(cards, text) {     //ранжируем data-атрибуты карточек после ввода номера
-  for (let i = numberInput.value; i <= cards.length; i++) {  //прогоняем все сдвинутые блоки и меняем их id в соответсвии с порядковым номером
+  for (let i = cardConfig.numberInput.value; i <= cards.length; i++) {  //прогоняем все сдвинутые блоки и меняем их id в соответсвии с порядковым номером
     cards[i - 1].dataset.indexNumber++;
     text[i - 1].textContent = cards[i - 1].dataset.indexNumber;
 
@@ -41,42 +28,42 @@ function rangingIdAfterInput(cards, text) {     //ранжируем data-атр
 }
 
 function validButton() {    //валидируем кнопку
-  // const isInputValid = !numberInput.checkValidity();
+  // const isInputValid = !cardConfig.numberInput.checkValidity();
   let isInputValid = false;
 
-  if (!numberInput.checkValidity() || !imageInput.checkValidity()) {   //если поля номера и картинки валидны
+  if (!cardConfig.numberInput.checkValidity() || !cardConfig.imageInput.checkValidity()) {   //если поля номера и картинки валидны
     isInputValid = true;
   }
   validInput();
 
-  button.disabled = isInputValid;
-  button.classList.toggle('add-card__button_disabled', isInputValid);
+  cardConfig.button.disabled = isInputValid;
+  cardConfig.button.classList.toggle('add-card__button_disabled', isInputValid);
 }
 
 function validInput() {
   const cardList = document.querySelectorAll(".card");
-  numberInput.setAttribute('required', '');
-  numberInput.setAttribute('pattern', `^[1-${cardList.length + 1}]`);  //работает корректно только до 9, дальше начинается байда
+  cardConfig.numberInput.setAttribute('required', '');
+  cardConfig.numberInput.setAttribute('pattern', `^[1-${cardList.length + 1}]`);  //работает корректно только до 9, дальше начинается байда
   // nameInput.setAttribute('required', '');
-  if (imageInput.value !== '') {                   //если поле ввода картинки не пустое, тогда оно обязательно для валидности
-    imageInput.setAttribute('required', '');
+  if (cardConfig.imageInput.value !== '') {                   //если поле ввода картинки не пустое, тогда оно обязательно для валидности
+    cardConfig.imageInput.setAttribute('required', '');
   }
   else {
-    imageInput.removeAttribute('required');
+    cardConfig.imageInput.removeAttribute('required');
   }
 }
 
 function resetElement() {
-  numberInput.value = '';
-  nameInput.value = '';
-  imageInput.value = '';
-  numberInput.removeAttribute('required');
-  imageInput.removeAttribute('required');
+  cardConfig.numberInput.value = '';
+  cardConfig.nameInput.value = '';
+  cardConfig.imageInput.value = '';
+  cardConfig.numberInput.removeAttribute('required');
+  cardConfig.imageInput.removeAttribute('required');
 }
 
 function resetButton() {
-  button.disabled = true;
-  button.classList.toggle('add-card__button_disabled');
+  cardConfig.button.disabled = true;
+  cardConfig.button.classList.toggle('add-card__button_disabled');
 }
 
 function disableArrow() {        //скарываем верхнии и нижнии стрелки
@@ -142,63 +129,45 @@ function listenerPositionButton() {            //слушаем кнопки в�
   });
 }
 
+function addCardByInput() {        //вставляем новые карточки
+  const input = { name: cardConfig.nameInput.value, image: cardConfig.imageInput.value, number: cardConfig.numberInput.value };
+  const newCard = createCard(input);
+  addCard(newCard);
+}
 
-function addCard() {    //добавляем карточку
+function primaryLoadingCards() {    //загружаем первичные карточки
+  initialCards.forEach((item) => {
+    const newCard = createCard(item);
+    cardConfig.cards.append(newCard);
+  });
+}
+
+function addCard(newCard) {    //добавляем карточку
   // evt.preventDefault();
 
   const cards = document.querySelectorAll(".card");
   const textInCards = document.querySelectorAll(".card__number");   // находим нумерацию блоков
-  const newCard = createCard();
 
-  if (cards.length >= (numberInput.value - 1) || numberInput.value == 1) {    //проверяем возможно ли вставить блок
-    if (cards.length == (numberInput.value - 1)) {    //??? надо проверить, походу лишнее условие   //если ставим блок на 1 место
-      cards[numberInput.value - 2].after(newCard);
-      //  randomColorCard();
-    }                                     //вставляем новый блок и окрашиваем его
-    else {
-      cards[numberInput.value - 1].before(newCard);
-      //  randomColorCard();
-    }
-
-    rangingIdAfterInput(cards, textInCards);  //ранжируем id блоков
-    listenerPositionButton();      //вешаем слушатели на кнопнки вверх вниз
-    resetElement();    //сбрасываем все импуты
-    resetButton();     //сбрасываем кнопку добавить
-    disableArrow();    //скрываем верхнии и нижнии стрелки
-  }
+  if (cards.length === (cardConfig.numberInput.value - 1)) {    //ставим блок на 1 место
+    cards[cardConfig.numberInput.value - 2].after(newCard);
+  }                                     //вставляем новый блок и окрашиваем его
   else {
-    //alert('Введите корректный номер');
-    console.log('Введите корректный номер');
+    cards[cardConfig.numberInput.value - 1].before(newCard);
   }
+
+  rangingIdAfterInput(cards, textInCards);  //ранжируем id блоков
+  listenerPositionButton();      //вешаем слушатели на кнопнки вверх вниз
+  resetElement();    //сбрасываем все импуты
+  resetButton();     //сбрасываем кнопку добавить
+  disableArrow();    //скрываем верхнии и нижнии стрелки
 }
 
-button.addEventListener('click', addCard);
-addCards.addEventListener('input', validButton);
+cardConfig.button.addEventListener('click', addCardByInput);
+cardConfig.addCards.addEventListener('input', validButton);
 
+primaryLoadingCards();    //первичные карточки
 resetButton();
 disableArrow();
 listenerPositionButton();
 
 
-
-
-
-// function randomColorCard() {       //функция окрашивания блока
-//   const newCards = document.querySelectorAll(".card");
-//   const r = Math.floor(Math.random() * 255);
-//   const g = Math.floor(Math.random() * 255);
-//   const b = Math.floor(Math.random() * 255);
-//   newCards[numberInput.value - 1].style.backgroundColor = `rgba(${r}, ${g}, ${b}, .3)`;  //окрашиваем новый блок в случайный цвет
-// }
-
-
-
-// const inputList = addCards.querySelectorAll('.add-card__input');
-// inputList.forEach(inputElement => {
-// });
-
-  //const idCard = document.getElementById(numberInput.value - 1);   // отслеживаем по id, есть ли рядом блок, с тем местом куда хотим вставить новый
-
-  //const dataCard = elem.getAttribute('data-index-number');    // отслеживаем по data-index-number, есть ли рядом блок, с тем местом куда хотим вставить новый
-
-  // blocks[numberInput.value - 2].insertAdjacentHTML('afterend', `<div id="${numberInput.value}" class="block"><p class="block__text">${numberInput.value}</p></div>`);
