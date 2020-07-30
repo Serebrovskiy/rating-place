@@ -6,6 +6,7 @@
 @import url(./__button-down/card__button-down.css);
 @import url(./__button-up/_disabled/card__button-up_disabled.css);
 @import url(./__button-down/_disabled/card__button-down_disabled.css);
+@import url(./__button-delete/card__button-delete.css);
 
 .card {
   width: 500px;
