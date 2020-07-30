@@ -29,5 +29,15 @@ export const cardConfig = {
   addCards: document.querySelector('.add-card'),
   numberInput: document.querySelector('.add-card__input_number'),  //номер который мы ввели
   nameInput: document.querySelector('.add-card__input_name'),
-  imageInput: document.querySelector('.add-card__input_image')
+  imageInput: document.querySelector('.add-card__input_image'),
+  buttonUpPositionList: document.querySelectorAll('.card__button-up'),
+  buttonDownPositionList: document.querySelectorAll('.card__button-down')
+}
+
+export const formValidatorOptions = {
+  formAddCard: '.add-card',
+  buttonAddCard: '.add-card__button',
+  buttonAddCardDisable: 'add-card__button_disabled',
+  inputAddCard: '.add-card__input',
+  inputAddCardNumber: '.add-card__input_number'
 }

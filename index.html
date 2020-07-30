@@ -11,12 +11,12 @@
 
 <body>
   <main class="root">
-    <form class="add-card">
-      <input class="add-card__input add-card__input_name" type="text" placeholder="Название"
+    <form class="add-card" >  <!--novalidate-->
+      <input class="add-card__input add-card__input_name" type="text" name="inputCardName" placeholder="Название"
         pattern="^[a-zA-Zа-яА-Я0-9\s-]+$" maxlength="15">
-      <input class="add-card__input add-card__input_image" type="url" placeholder="Ссылка на картинку">
-      <input class="add-card__input add-card__input_number" type="text" placeholder="Номер" pattern="^[1-9]">
-      <button class="add-card__button" type="button">Добавить</button>
+      <input class="add-card__input add-card__input_image" type="url" name="inputCardImage" placeholder="Ссылка на картинку">
+      <input class="add-card__input add-card__input_number" type="text" name="inputCardNumber" placeholder="Номер"  minlength="1">  <!-- pattern="[0-9]"  ||  ^[1-20]{1,2}-->
+      <button class="add-card__button" type="submit">Добавить</button>
     </form>
     <section class="cards">
 
@@ -30,12 +30,13 @@
       <img class="card__image" src="./images/" alt="">
       <div class="card__container-buttons">
         <button class="card__button-up" type="button"></button>
+        <button class="card__button-delete" type="button"></button>
         <button class="card__button-down" type="button"></button>
       </div>
     </div>
   </template>
 
-  <script type="module" src="scripts/script.js"></script>
+  <script type="module" src="pages/index.js"></script>
 </body>
 
 </html>
