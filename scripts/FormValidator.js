@@ -16,12 +16,12 @@ export default class FormValidator {
   _setEventListener() {
     this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
-        if (inputElement.name === 'inputCardName') {
-          this._handleInputName(inputElement)
-        }
-        if (inputElement.name === 'inputCardImage') {
-          this._handleInputImage(inputElement)
-        }
+        // if (inputElement.name === 'inputCardName') {
+        //   this._handleInputName(inputElement)
+        // }
+        // if (inputElement.name === 'inputCardImage') {
+        //   this._handleInputImage(inputElement)
+        // }
         if (inputElement.name === 'inputCardNumber') {
           this._handleInputNumber(inputElement)
         }

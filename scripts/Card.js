@@ -74,6 +74,7 @@ export default class Card {
     this._rangingCardAfterDelete(this._element.dataset.indexNumber);
     this._element.remove();
     this._element = null;
+
     this._removeEventListener();
     this._handleDisableArrow();  //скрываем верхнии и нижнии стрелки при удалении
   }
