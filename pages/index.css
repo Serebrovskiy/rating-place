@@ -2,3 +2,5 @@
 @import url(../blocks/add-card/add-card.css);
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/card/card.css);
+@import url(../blocks/card/_hide/card_hide.css);
+@import url(../blocks/card/_hovered/card_hovered.css);

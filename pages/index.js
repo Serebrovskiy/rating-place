@@ -11,7 +11,7 @@ let cards = document.querySelectorAll(".card");
 const formValidator = new FormValidator(formValidatorOptions, formValidatorOptions.formAddCard);
 formValidator.enableValidation();
 
-function rangingIdAfterInput(cards, text) {     //ранжируем data-атрибуты карточек после ввода номера
+function rangingIdAfterInput(cards, text) {     //ранжируем data-атрибуты карточек после создания новой карточки
   for (let i = cardConfig.numberInput.value; i <= cards.length; i++) {  //прогоняем все сдвинутые блоки и меняем их id в соответсвии с порядковым номером
     cards[i - 1].dataset.indexNumber++;
     text[i - 1].textContent = cards[i - 1].dataset.indexNumber;
@@ -19,6 +19,91 @@ function rangingIdAfterInput(cards, text) {     //ранжируем data-атр
     if (i == cards.length && cards[i] != null) {    //для последнего блока
       cards[i].dataset.indexNumber = cards.length + 1;
     }
+  }
+}
+
+function rangingIdAfterDragAndDrop(cards1, cardActive, card) {     //ранжируем data-атрибуты карточек после перетаскивания
+  const cards = document.querySelectorAll('.card');
+  const textCardActive = cardActive.querySelector(".card__number");
+  const startingCardPosition = cardActive.dataset.indexNumber;
+  const finishedCardPosition = card.dataset.indexNumber;
+
+  if (startingCardPosition < finishedCardPosition) {
+     console.log('опускаем')
+    card.after(cardActive);
+    textCardActive.textContent =  finishedCardPosition; //cardActive -карточка которую перетаскиваем, card -карт. на место которой ставим
+    cardActive.dataset.indexNumber = finishedCardPosition;
+    for (let i = (cardActive.dataset.indexNumber - 1); i > (startingCardPosition - 1); i--) {
+      cards[i].dataset.indexNumber--;
+      cards[i].querySelector(".card__number").textContent--;
+    }
+  }
+  else {
+     console.log('поднимаем')
+    card.before(cardActive);
+    textCardActive.textContent = finishedCardPosition;
+    cardActive.dataset.indexNumber = finishedCardPosition;
+    for (let i = (cardActive.dataset.indexNumber - 1) ; i < (startingCardPosition - 1); i++) {
+      cards[i].dataset.indexNumber++;
+      cards[i].querySelector(".card__number").textContent++;
+    }
+  }
+  disableArrow();
+}
+
+function dragAndDrop () {            //переставляем карточки путем перетаскивания card
+  let card = document.querySelector('.card');
+  cards = document.querySelectorAll(".card");
+
+  cardConfig.cards.addEventListener('mousedown', function(evt) {
+    console.log(evt.target)
+    if(evt.target.classList.contains('card')){
+       card = evt.target;
+    }
+  });
+  const dragStart = function () {
+    // setTimeout(() => {
+    //   this.classList.add('card_hide');
+    // }, 0);
+  }
+  const dragEnd = function () {
+  //  this.classList.remove('card_hide');
+  }
+  const dragOver = function (evt) {
+    evt.preventDefault();
+  }
+  const dragEnter = function (evt) {
+    evt.preventDefault();
+    this.classList.add('card_hovered');
+  }
+  const dragLeave = function () {
+    this.classList.remove('card_hovered');
+  }
+  const dragDrop = function () {
+    this.classList.remove('card_hovered');
+    rangingIdAfterDragAndDrop(cards, card, this);
+  }
+
+  cards.forEach(cell => {
+    console.log(cell)
+    cell.addEventListener('dragover', dragOver);
+    cell.addEventListener('dragenter', dragEnter);
+    cell.addEventListener('dragleave', dragLeave);
+    cell.addEventListener('drop', dragDrop);
+  })
+
+   card.addEventListener('dragstart', dragStart);
+   card.addEventListener('dragend', dragEnd);
+}
+
+const rangingCardAfterDelete = (dataNumber) => {   //ранжируем data-атрибуты карточек после удаления карточки
+  cards = document.querySelectorAll(".card");
+  console.log(cards)
+  const text = document.querySelectorAll(".card__number");
+
+  for (let i = dataNumber; i < cards.length; i++) {
+    cards[i].dataset.indexNumber--;
+    text[i].textContent = cards[i].dataset.indexNumber;
   }
 }
 
@@ -47,22 +132,12 @@ function disableArrow() {        //скарываем верхнии и нижн
   });
 }
 
-const rangingCardAfterDelete = (dataNumber) => {
-  cards = document.querySelectorAll(".card");
-  const text = document.querySelectorAll(".card__number");
-
-  for (let i = dataNumber; i < cards.length; i++) {
-    cards[i].dataset.indexNumber--;
-    text[i].textContent = cards[i].dataset.indexNumber;
-  }
-}
-
 function primaryLoadingCards() {    //загружаем первичные карточки
   console.log(initialCards)
   const cardList = new Section(initialCards,
     {
       renderer: (item) => {
-        const newCard = new Card(item, '#card', disableArrow, rangingCardAfterDelete);
+        const newCard = new Card(item, '#card', disableArrow, rangingCardAfterDelete);  //, dragAndDrop
         const cardElement = newCard.getCard()
 
         return cardElement;
@@ -98,7 +173,7 @@ function addCard(newCard) {    //добавляем карточку
 const rendererFormCard = () => {
   const input = { name: cardConfig.nameInput.value, image: cardConfig.imageInput.value, number: cardConfig.numberInput.value };
 
-  const newCard = new Card(input, '#card', disableArrow, rangingCardAfterDelete);
+  const newCard = new Card(input, '#card', disableArrow, rangingCardAfterDelete);   //, dragAndDrop
   const cardElement = newCard.getCard()
 
   addCard(cardElement);
@@ -110,6 +185,22 @@ formCard.setEventListener();
 primaryLoadingCards();    //первичные карточки
 formValidator.resetButton();
 disableArrow();
+
+console.log(cards)
+
+
+ dragAndDrop();
+
+
+
+
+
+
+
+
+
+    // let x = + cardActive.dataset.indexNumber
+    // console.log(typeof cardActive.dataset.indexNumber)
 
 
 //cardConfig.addCards.addEventListener('input', validButton);

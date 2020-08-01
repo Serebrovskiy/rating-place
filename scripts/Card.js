@@ -28,7 +28,6 @@ export default class Card {
     this._cardDeleteButton = this._element.querySelector('.card__button-delete');
     this._card = this._element.closest('.card');
 
-
     this._setEventListeners();
 
     this._cardName.textContent = this._name;
