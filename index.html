@@ -24,11 +24,11 @@
   </main>
 
   <template id="card">
-    <div class="card"> <!--data-index-number="..."-->
-      <p class="card__number"></p>
-      <p class="card__text"></p>
-      <img class="card__image" src="./images/" alt="">
-      <div class="card__container-buttons">
+    <div class="card" draggable="true"> <!--data-index-number="..."-->
+      <p class="card__number" draggable="false"></p>
+      <p class="card__text" draggable="false"></p>
+      <img class="card__image" src="./images/" alt="" draggable="false"> <!--draggable="false"-->
+      <div class="card__container-buttons" draggable="false">
         <button class="card__button-up" type="button"></button>
         <button class="card__button-delete" type="button"></button>
         <button class="card__button-down" type="button"></button>

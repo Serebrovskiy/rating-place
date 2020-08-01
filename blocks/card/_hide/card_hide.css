@@ -1,0 +1,6 @@
+.card_hide {
+  /* display: none; */
+  visibility: hidden;
+  /* opacity: .4; */
+  transition: visibility 0.5s, opacity 0.5s linear;
+}

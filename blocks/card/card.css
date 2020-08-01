@@ -19,6 +19,11 @@
   animation: showBlock 1s linear forwards;
 }
 
+.card:hover {
+  opacity: .9;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 400px) {
   .card {
     width: 300px;
